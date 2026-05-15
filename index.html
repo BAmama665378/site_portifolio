@@ -1,1052 +1,158 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Matheus Marinho — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --bg: #080c12;
-      --surface: #0e141f;
-      --surface2: #131b28;
-      --border: rgba(255,255,255,0.07);
-      --accent: #00e5ff;
-      --accent2: #7b61ff;
-      --accent3: #ff4f6a;
-      --text: #e8edf5;
-      --muted: #6b7a99;
-      --mono: 'Space Mono', monospace;
-      --display: 'Syne', sans-serif;
-      --body: 'DM Sans', sans-serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--body);
-      font-size: 16px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.4;
-    }
-
-    /* ── CURSOR GLOW ── */
-    .cursor-glow {
-      position: fixed;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: left 0.15s ease, top 0.15s ease;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.2rem 3rem;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(8,12,18,0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.9rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      padding: 120px 3rem 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero::after {
-      content: '';
-      position: absolute;
-      top: -20%; right: -10%;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      border: 1px solid rgba(0,229,255,0.3);
-      padding: 0.3rem 0.8rem;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.12em;
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-name {
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: clamp(3rem, 5vw, 5.5rem);
-      line-height: 1.0;
-      margin-bottom: 0.5rem;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    .hero-name span { color: var(--accent); }
-    .hero-title {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-    .hero-bio {
-      font-size: 1rem;
-      color: #9aaab8;
-      max-width: 480px;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-    .hero-actions {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.4s ease both;
-    }
-    .btn {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      padding: 0.75rem 1.6rem;
-      border-radius: 3px;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #080c12;
-      font-weight: 700;
-    }
-    .btn-primary:hover { background: #33eaff; box-shadow: 0 0 24px rgba(0,229,255,0.4); transform: translateY(-1px); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-    .hero-meta {
-      display: flex; flex-direction: column; gap: 0.5rem;
-      margin-top: 2.5rem;
-      animation: fadeUp 0.6s 0.5s ease both;
-    }
-    .meta-item {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .meta-item::before { content: '▸'; color: var(--accent); }
-
-    /* ── PROFILE PHOTO ── */
-    .hero-photo-side {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeUp 0.8s 0.2s ease both;
-    }
-    .photo-wrapper {
-      position: relative;
-      width: 300px; height: 300px;
-    }
-    .photo-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: conic-gradient(var(--accent), var(--accent2), var(--accent3), var(--accent));
-      animation: spin 4s linear infinite;
-      z-index: 0;
-    }
-    .photo-wrapper::after {
-      content: '';
-      position: absolute;
-      inset: -16px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
-      z-index: 0;
-    }
-    .photo-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      background: var(--surface2);
-      border: 4px solid var(--bg);
-    }
-    .photo-inner img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .photo-upload-label {
-      position: absolute;
-      bottom: 10px; right: 10px;
-      z-index: 3;
-      background: var(--accent);
-      color: #080c12;
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-      border: 3px solid var(--bg);
-      transition: all 0.2s;
-      box-shadow: 0 0 12px rgba(0,229,255,0.4);
-    }
-    .photo-upload-label:hover { transform: scale(1.1); }
-    #photoInput { display: none; }
-    .photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      text-align: center;
-      gap: 0.5rem;
-    }
-    .photo-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 100px 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      margin-bottom: 0.75rem;
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .section-label::after {
-      content: '';
-      height: 1px;
-      width: 60px;
-      background: var(--accent);
-      opacity: 0.4;
-    }
-    .section-title {
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      margin-bottom: 3rem;
-      line-height: 1.1;
-    }
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ── CARD ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      transition: border-color 0.2s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .card:hover {
-      border-color: rgba(0,229,255,0.25);
-      transform: translateY(-2px);
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .card:hover::before { opacity: 1; }
-
-    /* ── EDUCATION ── */
-    .edu-grid { display: grid; gap: 1.5rem; }
-    .edu-card {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
-    .edu-icon {
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(123,97,255,0.15));
-      border: 1px solid rgba(0,229,255,0.2);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
-    .edu-year {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-    .edu-course {
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 1.05rem;
-      margin-bottom: 0.15rem;
-    }
-    .edu-institution {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
-    .skill-item { display: flex; flex-direction: column; gap: 0.5rem; }
-    .skill-header { display: flex; justify-content: space-between; }
-    .skill-name { font-size: 0.88rem; font-weight: 500; }
-    .skill-pct { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); }
-    .skill-bar {
-      height: 4px;
-      background: var(--border);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .skill-fill {
-      height: 100%;
-      border-radius: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      animation: growBar 1.2s ease both;
-    }
-    @keyframes growBar { from { width: 0 !important; } }
-
-    /* ── LANGUAGE BADGES ── */
-    .lang-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .lang-badge {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1rem 1.5rem;
-      display: flex; flex-direction: column; gap: 0.25rem;
-      min-width: 160px;
-      transition: border-color 0.2s;
-    }
-    .lang-badge:hover { border-color: rgba(0,229,255,0.3); }
-    .lang-name { font-family: var(--display); font-weight: 700; font-size: 1rem; }
-    .lang-level { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); }
-
-    /* ── PROJECTS ── */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-    .proj-tag {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent2);
-      border: 1px solid rgba(123,97,255,0.3);
-      border-radius: 2px;
-      padding: 0.2rem 0.5rem;
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.08em;
-    }
-    .proj-title {
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.6rem;
-    }
-    .proj-desc { font-size: 0.88rem; color: #7a8ba0; line-height: 1.6; }
-
-    /* ── SOFT SKILLS ── */
-    .soft-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .soft-pill {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 0.5rem 1.25rem;
-      font-size: 0.85rem;
-      color: var(--text);
-      display: flex; align-items: center; gap: 0.5rem;
-      transition: all 0.2s;
-    }
-    .soft-pill:hover {
-      border-color: rgba(0,229,255,0.4);
-      color: var(--accent);
-      background: rgba(0,229,255,0.05);
-    }
-    .soft-pill span { color: var(--accent); font-size: 0.9rem; }
-
-    /* ── TESTIMONIALS ── */
-    .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-    .testi-quote {
-      font-size: 3rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      font-family: Georgia, serif;
-    }
-    .testi-text {
-      font-size: 0.92rem;
-      color: #8a9bb5;
-      line-height: 1.7;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-    }
-    .testi-author {
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .testi-avatar {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .testi-name { font-weight: 600; font-size: 0.9rem; }
-    .testi-role { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
-
-    /* ── INTERESTS ── */
-    .interest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-    .interest-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.25s;
-    }
-    .interest-card:hover {
-      border-color: rgba(0,229,255,0.3);
-      background: rgba(0,229,255,0.03);
-      transform: translateY(-3px);
-    }
-    .interest-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-    .interest-title {
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
-    }
-    .interest-desc { font-size: 0.78rem; color: var(--muted); }
-
-    /* ── CONTACT ── */
-    #contact {
-      padding: 100px 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .contact-link {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 1rem 1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      text-decoration: none;
-      color: var(--text);
-      margin-bottom: 1rem;
-      transition: all 0.2s;
-    }
-    .contact-link:hover {
-      border-color: rgba(0,229,255,0.4);
-      color: var(--accent);
-      transform: translateX(4px);
-    }
-    .contact-link-icon {
-      width: 40px; height: 40px;
-      background: rgba(0,229,255,0.08);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    .contact-link-label { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
-    .contact-link-value { font-size: 0.9rem; font-weight: 500; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; padding: 100px 1.5rem 60px; gap: 3rem; }
-      .hero-photo-side { order: -1; }
-      .photo-wrapper { width: 220px; height: 220px; }
-      section, #contact { padding: 70px 1.5rem; }
-      .contact-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── ACTIVE NAV ── */
-    .nav-links a.active { color: var(--accent); }
-
-    /* ── ONGOING STUDIES TAG ── */
-    .ongoing-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: #ff9f43;
-      border: 1px solid rgba(255,159,67,0.3);
-      border-radius: 2px;
-      padding: 0.2rem 0.6rem;
-      margin-left: 0.5rem;
-    }
-    .ongoing-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #ff9f43;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Alexandre Ramos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #004080, #0073e6);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        h2 {
+            color: #004080;
+            border-bottom: 2px solid #0073e6;
+            padding-bottom: 5px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        footer {
+            background: #004080;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Alexandre Ramos</h1>
+        <p>Portfólio Digital</p>
+    </header>
 
-<div class="cursor-glow" id="cursorGlow"></div>
+    <nav>
+        <a href="#biografia">Biografia</a>
+        <a href="#curriculo">Currículo</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#certificados">Certificados</a>
+        <a href="#testemunhos">Testemunhos</a>
+    </nav>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">MM.DEV</div>
-  <ul class="nav-links">
-    <li><a href="#hero">Início</a></li>
-    <li><a href="#about">Sobre</a></li>
-    <li><a href="#education">Formação</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projetos</a></li>
-    <li><a href="#testimonials">Recomendações</a></li>
-    <li><a href="#contact">Contato</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero" style="max-width:100%;padding-top:120px;">
-  <div class="hero-content">
-    <div class="hero-tag">// PORTFÓLIO PROFISSIONAL</div>
-    <h1 class="hero-name">Matheus<br><span>Marinho</span></h1>
-    <p class="hero-title">Estudante de Ciências da Computação</p>
-    <p class="hero-bio">
-      Apaixonado por tecnologia desde criança, buscando construir uma sólida base em desenvolvimento de software, inteligência artificial e ciência de dados. Atualmente no 1° semestre na Universidade de Brasília.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">Entrar em contato</a>
-      <a href="https://github.com/matheusom08" target="_blank" class="btn btn-ghost">GitHub →</a>
-    </div>
-    <div class="hero-meta">
-      <span class="meta-item">Brasília, DF — Brazil</span>
-      <span class="meta-item">Ciências da Computação · CEUB · 1° Semestre</span>
-      <span class="meta-item">Disponível para estágio</span>
-    </div>
-  </div>
-
-  <div class="hero-photo-side">
-    <div class="photo-wrapper">
-      <div class="photo-inner" id="photoInner">
-        <div class="photo-placeholder" id="photoPlaceholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          <span>Foto de Perfil</span>
+    <section id="biografia">
+        <h2>Biografia</h2>
+        <div class="card">
+            <p>Natural de Brasília, fã da aviação civil com <strong>753,5 horas</strong> em simuladores comerciais e <strong>156,3 horas</strong> em simuladores militares.</p>
+            <p>Email acadêmico: <a href="mailto:alexandregramos@sempreceub.com">alexandregramos@sempreceub.com</a></p>
+            <p>Email profissional: <a href="mailto:alexandregardinoramos@gmail.com">alexandregardinoramos@gmail.com</a></p>
         </div>
-      </div>
-      <label class="photo-upload-label" for="photoInput" title="Adicionar foto">📷</label>
-      <input type="file" id="photoInput" accept="image/*" />
-    </div>
-  </div>
-</section>
+    </section>
 
-<hr class="divider" />
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">01 // SOBRE MIM</div>
-  <h2 class="section-title">Quem sou eu</h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;" class="reveal">
-    <div class="card">
-      <p style="color:#9aaab8;line-height:1.8;font-size:0.95rem;">
-        Sou Matheus Marinho, nascido e criado em Brasília, DF. Desde muito jovem desenvolvi uma curiosidade natural pela tecnologia — fui aquele filho que sempre ajudou os pais a configurar o computador, instalar programas e resolver pequenos problemas do dia a dia com os dispositivos de casa. Essa relação com a tecnologia nunca foi obrigação; sempre foi paixão.
-      </p>
-      <br>
-      <p style="color:#9aaab8;line-height:1.8;font-size:0.95rem;">
-        Atualmente curso o 1° semestre de Bacharelado em Ciências da Computação no Centro Universitário de Brasília (CEUB), onde estou construindo as bases sólidas que necessito para atuar profissionalmente na área. Tenho especial interesse em Inteligência Artificial, Ciência de Dados e Cibersegurança.
-      </p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:1rem;">
-      <div class="card" style="display:flex;align-items:center;gap:1rem;">
-        <div style="font-size:2rem;">🎓</div>
-        <div>
-          <div style="font-family:var(--display);font-weight:700;">1° Semestre</div>
-          <div style="font-size:0.82rem;color:var(--muted);">Ciências da Computação · CEUB</div>
+    <section id="curriculo">
+        <h2>Currículo</h2>
+        <div class="card">
+            <ul>
+                <li>Ensino Médio: Colégio Marista de Brasília (completo)</li>
+                <li>Ensino Superior: Ciência da Computação - CEUB (1º semestre)</li>
+                <li>Experiência: Procurando estágio e estudando para concurso público</li>
+            </ul>
+            <h3>Conhecimentos</h3>
+            <ul>
+                <li>Inglês avançado (Cultura Inglesa)</li>
+                <li>Russo básico (Thiago de Melo)</li>
+                <li>Montagem de computadores</li>
+            </ul>
         </div>
-      </div>
-      <div class="card" style="display:flex;align-items:center;gap:1rem;">
-        <div style="font-size:2rem;">📍</div>
-        <div>
-          <div style="font-family:var(--display);font-weight:700;">Brasília, DF</div>
-          <div style="font-size:0.82rem;color:var(--muted);">Brasil</div>
+    </section>
+
+    <section id="projetos">
+        <h2>Projetos Acadêmicos</h2>
+        <div class="card">
+            <ul>
+                <li>Revista Obras do PAS 3 2025 UnB - <a href="https://docs.google.com/document/d/1RQzZYDoK35d-8bhgMMw4yGUIuYAzvDZJxpSha_e0zWw/edit?usp=sharing" target="_blank">Link</a></li>
+                <li>Projeto de Estrutura de TIC - Em desenvolvimento</li>
+            </ul>
         </div>
-      </div>
-      <div class="card" style="display:flex;align-items:center;gap:1rem;">
-        <div style="font-size:2rem;">💻</div>
-        <div>
-          <div style="font-family:var(--display);font-weight:700;">Disponível para Estágio</div>
-          <div style="font-size:0.82rem;color:var(--muted);">Presencial · Remoto · Híbrido</div>
+    </section>
+
+    <section id="habilidades">
+        <h2>Habilidades</h2>
+        <div class="card">
+            <h3>Matemática</h3>
+            <ul>
+                <li>Lógica</li>
+                <li>Números Complexos</li>
+                <li>Polinômios</li>
+                <li>Probabilidade</li>
+            </ul>
+            <h3>Computação</h3>
+            <ul>
+                <li>Cursando C</li>
+                <li>Python básico</li>
+                <li>Montagem e Disassembly de PCs</li>
+            </ul>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<hr class="divider" />
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-label">02 // FORMAÇÃO</div>
-  <h2 class="section-title">Trajetória Acadêmica</h2>
-  <div class="edu-grid reveal">
-
-    <div class="card edu-card">
-      <div class="edu-icon">🎓</div>
-      <div>
-        <div class="edu-year">2026 — CURSANDO
-          <span class="ongoing-badge"><span class="ongoing-dot"></span> Em andamento</span>
+    <section id="certificados">
+        <h2>Certificados e Cursos em Andamento</h2>
+        <div class="card">
+            <ul>
+                <li>Certificado em Python</li>
+                <li>Curso de C (em andamento)</li>
+                <li>Curso de Java (em andamento)</li>
+                <li>Curso de SQL (em andamento)</li>
+            </ul>
         </div>
-        <div class="edu-course">Bacharelado em Ciências da Computação</div>
-        <div class="edu-institution">Centro Universitário de Brasília — CEUB · 1° Semestre</div>
-      </div>
-    </div>
+    </section>
 
-    <div class="card edu-card">
-      <div class="edu-icon">🏫</div>
-      <div>
-        <div class="edu-year">CONCLUÍDO</div>
-        <div class="edu-course">Ensino Médio Completo</div>
-        <div class="edu-institution">Colégio Militar Dom Pedro II · Brasília, DF</div>
-      </div>
-    </div>
-
-    <div class="card edu-card">
-      <div class="edu-icon">🐍</div>
-      <div>
-        <div class="edu-year">CERTIFICADO</div>
-        <div class="edu-course">Introdução à Python</div>
-        <div class="edu-institution">Curso de Programação · Python Fundamentos</div>
-      </div>
-    </div>
-
-    <div class="card edu-card">
-      <div class="edu-icon">🤖</div>
-      <div>
-        <div class="edu-year">CERTIFICADO — GOOGLE</div>
-        <div class="edu-course">Básico de Inteligência Artificial: A Nova Era da Inovação</div>
-        <div class="edu-institution">Google · Formação em IA</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Estudos em Andamento -->
-  <div style="margin-top:2.5rem;" class="reveal">
-    <div class="section-label" style="margin-bottom:1.5rem;">📚 ESTUDOS EM ANDAMENTO</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;">
-      <div class="card" style="border-color:rgba(255,159,67,0.2);">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">⚙️</div>
-        <div style="font-family:var(--display);font-weight:700;margin-bottom:0.25rem;">Lógica de Programação em C</div>
-        <div style="font-size:0.82rem;color:var(--muted);">Estruturas de controle, ponteiros, memória</div>
-        <span class="ongoing-badge" style="margin-top:0.75rem;display:inline-flex;"><span class="ongoing-dot"></span> Em andamento</span>
-      </div>
-      <div class="card" style="border-color:rgba(255,159,67,0.2);">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🐍</div>
-        <div style="font-family:var(--display);font-weight:700;margin-bottom:0.25rem;">Lógica de Programação em Python</div>
-        <div style="font-size:0.82rem;color:var(--muted);">Algoritmos, estruturas de dados, POO</div>
-        <span class="ongoing-badge" style="margin-top:0.75rem;display:inline-flex;"><span class="ongoing-dot"></span> Em andamento</span>
-      </div>
-      <div class="card" style="border-color:rgba(255,159,67,0.2);">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🗄️</div>
-        <div style="font-family:var(--display);font-weight:700;margin-bottom:0.25rem;">SQL para Banco de Dados</div>
-        <div style="font-size:0.82rem;color:var(--muted);">Consultas, modelagem, relacionamentos</div>
-        <span class="ongoing-badge" style="margin-top:0.75rem;display:inline-flex;"><span class="ongoing-dot"></span> Em andamento</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">03 // HABILIDADES</div>
-  <h2 class="section-title">Skills Técnicas</h2>
-  <div class="skills-grid reveal">
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">Python</span><span class="skill-pct">65%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">Lógica em C</span><span class="skill-pct">40%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">SQL / Banco de Dados</span><span class="skill-pct">35%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:35%"></div></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">Inteligência Artificial (Básico)</span><span class="skill-pct">45%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">Git / GitHub</span><span class="skill-pct">55%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
-    </div>
-    <div class="skill-item">
-      <div class="skill-header"><span class="skill-name">Resolução de Problemas</span><span class="skill-pct">80%</span></div>
-      <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-    </div>
-  </div>
-
-  <!-- LANGUAGES -->
-  <div style="margin-top:3.5rem;" class="reveal">
-    <div class="section-label" style="margin-bottom:1.5rem;">🌐 IDIOMAS</div>
-    <div class="lang-grid">
-      <div class="lang-badge">
-        <span class="lang-name">🇧🇷 Português</span>
-        <span class="lang-level">Língua Nativa</span>
-      </div>
-      <div class="lang-badge">
-        <span class="lang-name">🇺🇸 Inglês</span>
-        <span class="lang-level">Intermediário Avançado</span>
-      </div>
-      <div class="lang-badge">
-        <span class="lang-name">🇫🇷 Francês</span>
-        <span class="lang-level">Nível B2 — Independente/Avançado</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- SOFT SKILLS -->
-  <div style="margin-top:3.5rem;" class="reveal">
-    <div class="section-label" style="margin-bottom:1.5rem;">🤝 COMPETÊNCIAS PESSOAIS</div>
-    <div class="soft-grid">
-      <div class="soft-pill"><span>🤝</span> Trabalho em equipe</div>
-      <div class="soft-pill"><span>💬</span> Comunicação eficiente</div>
-      <div class="soft-pill"><span>🎖️</span> Respeito à hierarquia</div>
-      <div class="soft-pill"><span>🧩</span> Resolução de problemas</div>
-      <div class="soft-pill"><span>📋</span> Organização</div>
-      <div class="soft-pill"><span>⏰</span> Pontualidade</div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">04 // PROJETOS</div>
-  <h2 class="section-title">Projetos & Interesses</h2>
-  <div class="projects-grid reveal">
-    <div class="card">
-      <div class="proj-tag">ACADÊMICO · PYTHON</div>
-      <div class="proj-title">portfolioHUB</div>
-      <p class="proj-desc">Desenvolvimento de portfólio digital profissional utilizando Git/GitHub para controle de versão, com estrutura organizada de seções profissionais, currículo e projetos acadêmicos.</p>
-      <br>
-      <a href="https://github.com/matheusom08" target="_blank" style="font-family:var(--mono);font-size:0.72rem;color:var(--accent);text-decoration:none;">Ver no GitHub →</a>
-    </div>
-    <div class="card">
-      <div class="proj-tag">ESTUDOS · PYTHON</div>
-      <div class="proj-title">Algoritmos em Python</div>
-      <p class="proj-desc">Estudo e implementação de algoritmos fundamentais em Python — lógica de programação, estruturas de dados e resolução de problemas computacionais básicos.</p>
-    </div>
-    <div class="card">
-      <div class="proj-tag">ESTUDOS · C · SQL</div>
-      <div class="proj-title">Fundamentos de C e Banco de Dados</div>
-      <p class="proj-desc">Exploração da linguagem C com foco em lógica e gerenciamento de memória, combinado com aprendizado de SQL para modelagem e consulta de bancos de dados relacionais.</p>
-    </div>
-  </div>
-
-  <!-- PRÓXIMOS PROJETOS / INTERESSES -->
-  <div style="margin-top:3.5rem;" class="reveal">
-    <div class="section-label" style="margin-bottom:1.5rem;">🚀 PRÓXIMAS ÁREAS DE INTERESSE</div>
-    <div class="interest-grid">
-      <div class="interest-card">
-        <div class="interest-icon">📊</div>
-        <div class="interest-title">Ciência de Dados</div>
-        <div class="interest-desc">Análise de dados, Machine Learning e visualização de informações.</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-icon">🔐</div>
-        <div class="interest-title">Cyber Segurança</div>
-        <div class="interest-desc">Segurança de sistemas, redes e proteção de dados.</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-icon">🤖</div>
-        <div class="interest-title">Inteligência Artificial</div>
-        <div class="interest-desc">Aprofundamento em IA, redes neurais e automação inteligente.</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-icon">🌐</div>
-        <div class="interest-title">Desenvolvimento Web</div>
-        <div class="interest-desc">Front-end, Back-end e arquitetura de sistemas web modernos.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="section-label">05 // RECOMENDAÇÕES</div>
-  <h2 class="section-title">O que dizem sobre mim</h2>
-  <div class="testi-grid reveal">
-
-    <div class="card">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Tive o prazer de acompanhar o desenvolvimento do Matheus ao longo do Ensino Médio no Colégio Militar Dom Pedro II. Desde o início, ele se destacou pela seriedade com que tratava os estudos e pela curiosidade intelectual acima da média. Na disciplina de Informática, demonstrou habilidade natural para resolver problemas de lógica de forma criativa e eficiente. Tenho plena confiança que ele terá uma carreira brilhante na área de Computação.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">CR</div>
-        <div>
-          <div class="testi-name">Prof. Carlos Rodrigues</div>
-          <div class="testi-role">Professor de Informática · Col. Mil. Dom Pedro II</div>
+    <section id="testemunhos">
+        <h2>Testemunhos</h2>
+        <div class="card">
+            <p>Certificação <strong>Aluno Destaque</strong> - médias ≥ 8</p>
+            <p>Certificados <strong>Aluno Elogio</strong> - médias ≥ 7</p>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="card">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Matheus foi um dos alunos mais dedicados que tive em Matemática. O que me chamou a atenção, além da disciplina e da pontualidade que o ambiente militar cultiva, foi sua capacidade de enxergar a lógica por trás dos problemas. Sempre ia além do que era pedido e ajudava os colegas com naturalidade. É um jovem que carrega consigo valores fortes e um potencial enorme — exatamente o tipo de profissional que o mercado de tecnologia precisa.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">AL</div>
-        <div>
-          <div class="testi-name">Profa. Ana Lima</div>
-          <div class="testi-role">Professora de Matemática · Col. Mil. Dom Pedro II</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="grid-column: 1 / -1;">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Quando pensamos no Matheus, a primeira coisa que vem à cabeça é: "precisa de ajuda com a tecnologia? Chama o Matheus." Desde pequeno, ele era o primeiro a aparecer quando o computador travava, quando a internet sumia do nada ou quando ninguém conseguia instalar aquele programa. Não fazia com impaciência — fazia com genuíno prazer em ajudar. Com o tempo, foi ficando cada vez mais sofisticado: configurava roteadores, recuperava arquivos perdidos, explicava como funcionava cada coisa de um jeito que a gente conseguia entender. Ver hoje ele cursando Ciências da Computação é simplesmente ver alguém seguindo exatamente o caminho que sempre foi dele. Temos muito orgulho.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">FM</div>
-        <div>
-          <div class="testi-name">Família Marinho</div>
-          <div class="testi-role">Relato familiar — Brasília, DF</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">06 // CONTATO</div>
-  <h2 class="section-title">Vamos conversar</h2>
-  <div class="contact-grid reveal">
-    <div>
-      <p style="color:#7a8ba0;margin-bottom:2rem;font-size:0.95rem;max-width:420px;">
-        Estou aberto a oportunidades de estágio, projetos acadêmicos e colaborações na área de tecnologia. Não hesite em entrar em contato!
-      </p>
-      <a href="https://github.com/matheusom08" target="_blank" class="contact-link">
-        <div class="contact-link-icon">🐙</div>
-        <div>
-          <div class="contact-link-label">GitHub</div>
-          <div class="contact-link-value">github.com/matheusom08</div>
-        </div>
-      </a>
-      <a href="mailto:matheus.marinho@semple.ceub.edu.br" class="contact-link">
-        <div class="contact-link-icon">📧</div>
-        <div>
-          <div class="contact-link-label">E-mail</div>
-          <div class="contact-link-value">matheus.marinho@semple.ceub.edu.br</div>
-        </div>
-      </a>
-      <div class="contact-link" style="cursor:default;">
-        <div class="contact-link-icon">📍</div>
-        <div>
-          <div class="contact-link-label">Localização</div>
-          <div class="contact-link-value">Brasília, DF — Brasil</div>
-        </div>
-      </div>
-    </div>
-    <div class="card" style="display:flex;flex-direction:column;gap:1.5rem;">
-      <div>
-        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-bottom:0.4rem;">INSTITUIÇÃO</div>
-        <div style="font-family:var(--display);font-weight:700;">Centro Universitário de Brasília</div>
-        <div style="font-size:0.85rem;color:var(--muted);">CEUB · Ciências da Computação · 1° Semestre</div>
-      </div>
-      <hr style="border:none;border-top:1px solid var(--border);" />
-      <div>
-        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-bottom:0.75rem;">STATUS ATUAL</div>
-        <div style="display:flex;align-items:center;gap:0.6rem;">
-          <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 8px rgba(34,197,94,0.6);animation:pulse 2s infinite;"></span>
-          <span style="font-size:0.88rem;">Disponível para oportunidades</span>
-        </div>
-      </div>
-      <hr style="border:none;border-top:1px solid var(--border);" />
-      <div>
-        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-bottom:0.5rem;">IDIOMAS DISPONÍVEIS</div>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-          <span style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:3px;padding:0.2rem 0.6rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);">🇧🇷 PT</span>
-          <span style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:3px;padding:0.2rem 0.6rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);">🇺🇸 EN</span>
-          <span style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:3px;padding:0.2rem 0.6rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);">🇫🇷 FR</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Matheus Marinho — portfolioHUB</span>
-  <span>Brasília, DF · CEUB · Ciências da Computação</span>
-</footer>
-
-<script>
-  // Cursor glow
-  const glow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  });
-
-  // Photo upload
-  const input = document.getElementById('photoInput');
-  const inner = document.getElementById('photoInner');
-  const placeholder = document.getElementById('photoPlaceholder');
-
-  // Load default photo from uploaded file
-  (async () => {
-    try {
-      const response = await fetch('/mnt/user-data/uploads/IMG_6336.jpg');
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        setPhoto(url);
-      }
-    } catch(e) {}
-  })();
-
-  function setPhoto(url) {
-    if (placeholder) placeholder.remove();
-    let img = inner.querySelector('img');
-    if (!img) {
-      img = document.createElement('img');
-      inner.appendChild(img);
-    }
-    img.src = url;
-    img.alt = 'Matheus Marinho';
-  }
-
-  input.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (file) setPhoto(URL.createObjectURL(file));
-  });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
-
-  // Active nav
-  const sections = document.querySelectorAll('section[id], #contact');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  });
-</script>
+    <footer>
+        <p>© 2026 Alexandre Ramos | <a href="https://linkedin.com/in/seuusuario" target="_blank">LinkedIn</a></p>
+    </footer>
 </body>
 </html>
