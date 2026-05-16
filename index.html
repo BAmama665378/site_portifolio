@@ -1,158 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Alexandre Ramos</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(135deg, #004080, #0073e6);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-        }
-        nav {
-            background: #333;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        h2 {
-            color: #004080;
-            border-bottom: 2px solid #0073e6;
-            padding-bottom: 5px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        footer {
-            background: #004080;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        footer a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio - Alexandre Ramos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Alexandre Ramos</h1>
-        <p>Portfólio Digital</p>
-    </header>
-
+  <!-- Header com foto -->
+  <header>
+    <div class="profile">
+      <img src="foto.jpg" alt="Foto de Alexandre Ramos">
+      <h1>Alexandre Ramos</h1>
+      <p>Estudante de Ciência da Computação | Brasília</p>
+    </div>
     <nav>
-        <a href="#biografia">Biografia</a>
-        <a href="#curriculo">Currículo</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#habilidades">Habilidades</a>
-        <a href="#certificados">Certificados</a>
-        <a href="#testemunhos">Testemunhos</a>
+      <ul>
+        <li><a href="#biografia">Biografia</a></li>
+        <li><a href="#curriculo">Currículo</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#certificados">Certificados</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <section id="biografia">
-        <h2>Biografia</h2>
-        <div class="card">
-            <p>Natural de Brasília, fã da aviação civil com <strong>753,5 horas</strong> em simuladores comerciais e <strong>156,3 horas</strong> em simuladores militares.</p>
-            <p>Email acadêmico: <a href="mailto:alexandregramos@sempreceub.com">alexandregramos@sempreceub.com</a></p>
-            <p>Email profissional: <a href="mailto:alexandregardinoramos@gmail.com">alexandregardinoramos@gmail.com</a></p>
-        </div>
-    </section>
+  <!-- Seções -->
+  <section id="biografia">
+    <h2>Biografia</h2>
+    <p>Natural de Brasília, fã da aviação civil com <strong>753,5 horas</strong> em simuladores comerciais e <strong>156,3 horas</strong> em simuladores militares.</p>
+  </section>
 
-    <section id="curriculo">
-        <h2>Currículo</h2>
-        <div class="card">
-            <ul>
-                <li>Ensino Médio: Colégio Marista de Brasília (completo)</li>
-                <li>Ensino Superior: Ciência da Computação - CEUB (1º semestre)</li>
-                <li>Experiência: Procurando estágio e estudando para concurso público</li>
-            </ul>
-            <h3>Conhecimentos</h3>
-            <ul>
-                <li>Inglês avançado (Cultura Inglesa)</li>
-                <li>Russo básico (Thiago de Melo)</li>
-                <li>Montagem de computadores</li>
-            </ul>
-        </div>
-    </section>
+  <section id="curriculo">
+    <h2>Currículo</h2>
+    <ul>
+      <li>Ensino Médio: Colégio Marista de Brasília</li>
+      <li>Ensino Superior: Ciência da Computação - CEUB (1º semestre)</li>
+      <li>Experiência: Procurando estágio e estudando para concurso público</li>
+    </ul>
+  </section>
 
-    <section id="projetos">
-        <h2>Projetos Acadêmicos</h2>
-        <div class="card">
-            <ul>
-                <li>Revista Obras do PAS 3 2025 UnB - <a href="https://docs.google.com/document/d/1RQzZYDoK35d-8bhgMMw4yGUIuYAzvDZJxpSha_e0zWw/edit?usp=sharing" target="_blank">Link</a></li>
-                <li>Projeto de Estrutura de TIC - Em desenvolvimento</li>
-            </ul>
-        </div>
-    </section>
+  <section id="projetos">
+    <h2>Projetos Acadêmicos</h2>
+    <ul>
+      <li><a href="https://docs.google.com/document/d/1RQzZYDoK35d-8bhgMMw4yGUIuYAzvDZJxpSha_e0zWw/edit?usp=sharing" target="_blank">Revista Obras do PAS 3 2025 UnB</a></li>
+      <li>Projeto de Estrutura de TIC - Em desenvolvimento</li>
+    </ul>
+  </section>
 
-    <section id="habilidades">
-        <h2>Habilidades</h2>
-        <div class="card">
-            <h3>Matemática</h3>
-            <ul>
-                <li>Lógica</li>
-                <li>Números Complexos</li>
-                <li>Polinômios</li>
-                <li>Probabilidade</li>
-            </ul>
-            <h3>Computação</h3>
-            <ul>
-                <li>Cursando C</li>
-                <li>Python básico</li>
-                <li>Montagem e Disassembly de PCs</li>
-            </ul>
-        </div>
-    </section>
+  <section id="habilidades">
+    <h2>Habilidades</h2>
+    <p><strong>Matemática:</strong> Lógica, Números Complexos, Polinômios, Probabilidade</p>
+    <p><strong>Computação:</strong> Python, C, Java, SQL, Montagem de PCs</p>
+  </section>
 
-    <section id="certificados">
-        <h2>Certificados e Cursos em Andamento</h2>
-        <div class="card">
-            <ul>
-                <li>Certificado em Python</li>
-                <li>Curso de C (em andamento)</li>
-                <li>Curso de Java (em andamento)</li>
-                <li>Curso de SQL (em andamento)</li>
-            </ul>
-        </div>
-    </section>
+  <section id="certificados">
+    <h2>Certificados</h2>
+    <ul>
+      <li>Certificado em Python</li>
+      <li>Curso de C (em andamento)</li>
+      <li>Curso de Java (em andamento)</li>
+      <li>Curso de SQL (em andamento)</li>
+    </ul>
+  </section>
 
-    <section id="testemunhos">
-        <h2>Testemunhos</h2>
-        <div class="card">
-            <p>Certificação <strong>Aluno Destaque</strong> - médias ≥ 8</p>
-            <p>Certificados <strong>Aluno Elogio</strong> - médias ≥ 7</p>
-        </div>
-    </section>
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Email acadêmico: <a href="mailto:alexandregramos@sempreceub.com">alexandregramos@sempreceub.com</a></p>
+    <p>Email profissional: <a href="mailto:alexandregardinoramos@gmail.com">alexandregardinoramos@gmail.com</a></p>
+    <p><a href="https://linkedin.com/in/seuusuario" target="_blank">LinkedIn</a> | <a href="https://github.com/seuusuario" target="_blank">GitHub</a></p>
+  </section>
 
-    <footer>
-        <p>© 2026 Alexandre Ramos | <a href="https://linkedin.com/in/seuusuario" target="_blank">LinkedIn</a></p>
-    </footer>
+  <footer>
+    <p>© 2026 Alexandre Ramos</p>
+  </footer>
 </body>
 </html>
