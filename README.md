@@ -1,5 +1,6 @@
 - Os aqruivos a baixo são todos destinados ao meu site.
 - index.html é responsável por definir os textos básicos, style.css define a aparência visual, vetores.c e lista.c são  programas criados por mim para demonstrar minhas competências em C.
+- O site não fui finalizado ainda (não fui capaz de integrar um executor em C para os programas listados acima) e nem todos os scripts estão integrados.
 - Linguagens utilizadas:
   
   <div style="display: inline_block"><br/>
