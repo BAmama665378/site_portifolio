@@ -12,14 +12,6 @@ header {
   padding: 40px 20px;
 }
 
-header .profile img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 4px solid white;
-  margin-bottom: 15px;
-}
-
 nav ul {
   list-style: none;
   padding: 0;
@@ -58,6 +50,20 @@ nav a:hover {
 .purple h2 { color: #6f42c1; }
 .red h2 { color: #dc3545; }
 .gray h2 { color: #495057; }
+.teal h2 { color: #20c997; }
+
+pre {
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: Consolas, monospace;
+  color: #333;
+  white-space: pre-wrap;
+}
 
 footer {
   background: #004080;
