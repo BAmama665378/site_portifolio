@@ -1,5 +1,5 @@
 - Os aqruivos a baixo são todos destinados ao meu site.
-- index.html é responsável por definir os textos básicos, style.css define a aparência visual, vetores.c é um programa criado por mim para demonstrar minhas competências em C.
+- index.html é responsável por definir os textos básicos, style.css define a aparência visual, vetores.c e lista.c são  programas criados por mim para demonstrar minhas competências em C.
 - Linguagens utilizadas:
   
   <div style="display: inline_block"><br/>
