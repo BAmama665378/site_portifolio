@@ -1,13 +1,15 @@
+/* Tema escuro geral */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #f4f4f9;
-  color: #333;
+  background: #121212; /* fundo escuro */
+  color: #e0e0e0; /* texto claro */
 }
 
+/* Cabeçalho */
 header {
-  background: linear-gradient(135deg, #004080, #0073e6);
-  color: white;
+  background: linear-gradient(135deg, #1f1f1f, #333);
+  color: #fff;
   text-align: center;
   padding: 40px 20px;
 }
@@ -21,53 +23,86 @@ nav ul {
 }
 
 nav a {
-  color: white;
+  color: #ffcc00;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 nav a:hover {
-  color: #ffcc00;
+  color: #fff;
 }
 
+/* Cards */
 .card {
   max-width: 900px;
   margin: 40px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 25px;
+  background: #1e1e1e; /* fundo escuro para cada seção */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.8);
 }
 
 .card h2 {
   margin-top: 0;
+  font-size: 1.6em;
 }
 
-.blue h2 { color: #004080; }
-.green h2 { color: #198754; }
-.orange h2 { color: #fd7e14; }
-.purple h2 { color: #6f42c1; }
-.red h2 { color: #dc3545; }
-.gray h2 { color: #495057; }
+/* Destaques por seção */
+.blue h2 { color: #4dabf7; }
+.green h2 { color: #51cf66; }
+.orange h2 { color: #ffa94d; }
+.purple h2 { color: #b197fc; }
+.red h2 { color: #ff6b6b; }
+.gray h2 { color: #adb5bd; }
 .teal h2 { color: #20c997; }
 
-pre {
-  background: #f0f0f0;
-  padding: 15px;
+/* Projetos, Habilidades e Certificados destacados */
+#projetos, #habilidades, #certificados {
+  border-left: 6px solid #ffcc00; /* barra lateral de destaque */
+  background: #1a1a1a;
+}
+
+#projetos ul li, #certificados ul li {
+  margin: 8px 0;
+  padding: 8px;
+  background: #2a2a2a;
   border-radius: 6px;
-  overflow-x: auto;
 }
 
-code {
-  font-family: Consolas, monospace;
-  color: #333;
-  white-space: pre-wrap;
+#habilidades p {
+  margin: 10px 0;
+  padding: 10px;
+  background: #2a2a2a;
+  border-radius: 6px;
 }
 
+/* Botões */
+button {
+  background: #ffcc00;
+  color: #121212;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #ffd633;
+}
+
+/* Rodapé */
 footer {
-  background: #004080;
-  color: white;
+  background: #1f1f1f;
+  color: #aaa;
   text-align: center;
   padding: 20px;
 }
