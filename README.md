@@ -1,1 +1,2 @@
-Código para meu site no github pages.
+- Os aqruivos a baixo são todos destinados ao meu site.
+- index.html é responsável por definir os textos básicos, style.css define a aparência visual, vetores.c é um programa criado por mim para demonstrar minhas competências em C.
